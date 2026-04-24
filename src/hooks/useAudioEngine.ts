@@ -229,6 +229,11 @@ export function useAudioEngine() {
     return () => {
       Object.values(stems).forEach((s) => s.stop?.())
       ctx.close()
+      // Null the refs so StrictMode's double-invoke rebuilds the graph cleanly
+      // instead of skipping re-init and then thrashing a closed context.
+      ctxRef.current = null
+      masterRef.current = null
+      stemsRef.current = null
     }
   }, [unlocked])
 
@@ -239,6 +244,9 @@ export function useAudioEngine() {
     if (!master || !ctx) return
     const t = ctx.currentTime
     master.gain.cancelScheduledValues(t)
+    // Anchor current value before the ramp — Safari otherwise treats the
+    // post-cancel state as the AudioParam default (1.0) and pops the volume.
+    master.gain.setValueAtTime(master.gain.value, t)
     master.gain.linearRampToValueAtTime(muted ? 0 : 0.7, t + 0.15)
   }, [muted])
 
