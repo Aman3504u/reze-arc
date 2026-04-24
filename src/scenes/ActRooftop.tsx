@@ -1,4 +1,4 @@
-import { useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
 import { useActScene } from '../hooks/useActScene'
@@ -24,8 +24,8 @@ export default function ActRooftop() {
   const rand = useMemo(() => new SeededRandom(77), [])
   const dummy = useMemo(() => new THREE.Object3D(), [])
 
-  // Petals init.
-  useMemo(() => {
+  // Petals init — must be useEffect so ref is attached post-commit.
+  useEffect(() => {
     if (!petalsRef.current) return
     for (let i = 0; i < PETAL_COUNT; i++) {
       dummy.position.set(

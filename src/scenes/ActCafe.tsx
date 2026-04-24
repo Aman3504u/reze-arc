@@ -1,4 +1,4 @@
-import { useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
 import { useActScene } from '../hooks/useActScene'
@@ -26,7 +26,9 @@ export default function ActCafe() {
   const rand = useMemo(() => new SeededRandom(41), [])
   const dummy = useMemo(() => new THREE.Object3D(), [])
 
-  useMemo(() => {
+  // Seed per-instance matrices once the InstancedMesh ref is attached.
+  // Must be useEffect (post-commit) — useMemo runs during render, before refs.
+  useEffect(() => {
     if (!rainRef.current) return
     for (let i = 0; i < COUNT; i++) {
       const r = rand.range(0.8, 7.5)
