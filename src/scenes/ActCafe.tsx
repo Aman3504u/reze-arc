@@ -27,6 +27,18 @@ export default function ActCafe() {
   const rand = useMemo(() => new SeededRandom(41), [])
   const dummy = useMemo(() => new THREE.Object3D(), [])
 
+  // Per-instance fall speed, seeded once so each streak keeps a consistent
+  // velocity. Calling rand.range() inside useFrame (as earlier versions did)
+  // advances the shared PRNG on every call, so each instance received a
+  // different random speed every frame — visually this reads as a high-
+  // frequency jitter. A separate PRNG keeps position seeding deterministic.
+  const rainSpeeds = useMemo(() => {
+    const prng = new SeededRandom(83)
+    const speeds = new Float32Array(COUNT)
+    for (let i = 0; i < COUNT; i++) speeds[i] = prng.range(3.8, 4.4)
+    return speeds
+  }, [])
+
   // Seed per-instance matrices once the InstancedMesh ref is attached.
   // Must be useEffect (post-commit) — useMemo runs during render, before refs.
   useEffect(() => {
@@ -54,7 +66,7 @@ export default function ActCafe() {
     const arr = rainRef.current.instanceMatrix.array as Float32Array
     for (let i = 0; i < COUNT; i++) {
       const base = i * 16
-      arr[base + 13] -= dt * rand.range(3.8, 4.4)
+      arr[base + 13] -= dt * rainSpeeds[i]
       if (arr[base + 13] < -1.2) arr[base + 13] = 6
     }
     rainRef.current.instanceMatrix.needsUpdate = true
