@@ -3,7 +3,8 @@ import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
 import { useActScene } from '../hooks/useActScene'
 import { SeededRandom } from '../utils/random'
-import { lerp } from '../utils/easing'
+import { lerp, smoothstep } from '../utils/easing'
+import { RezePortrait } from './primitives/RezePortrait'
 
 /**
  * Act I — The Café in the Rain.
@@ -118,21 +119,16 @@ export default function ActCafe() {
         </mesh>
       </group>
 
-      {/* reze silhouette (shoulders + hair silhouette = hinted circle) */}
-      <group position={[0.85, 0, 0.6]}>
-        <mesh position={[0, 1.05, 0]} castShadow>
-          <cylinderGeometry args={[0.24, 0.3, 0.9, 8]} />
-          <meshStandardMaterial color="#120507" roughness={0.9} />
-        </mesh>
-        <mesh position={[0, 1.72, 0]} castShadow>
-          <sphereGeometry args={[0.2, 16, 16]} />
-          <meshStandardMaterial color="#120507" roughness={0.8} />
-        </mesh>
-        {/* red clip — the single color accent */}
-        <mesh position={[0.08, 1.86, 0.15]}>
-          <boxGeometry args={[0.08, 0.02, 0.06]} />
-          <meshBasicMaterial color="#e53250" toneMapped={false} />
-        </mesh>
+      {/* Reze — portrait billboard replaces the abstract silhouette so she
+          reads as a character, not just a shape. Positioned where the head
+          + shoulders of a seated figure would be at the counter. */}
+      <group position={[0.85, 0, 0.58]} rotation={[0, -0.12, 0]}>
+        <RezePortrait
+          variant="cafe"
+          position={[0, 1.45, 0]}
+          height={1.75}
+          opacity={smoothstep(visibility)}
+        />
       </group>
 
       {/* neon sign 珈琲 in window (as a plane with emissive material) */}

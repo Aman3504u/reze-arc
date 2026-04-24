@@ -35,6 +35,24 @@ export default function ActAftermath() {
     return tex
   }, [])
 
+  // Second canvas — the sign-off line "— デンジ。". Rendered into its own
+  // texture so it can fade in independently of the main title.
+  const quoteCanvas = useMemo(() => {
+    const canvas = document.createElement('canvas')
+    canvas.width = 1024
+    canvas.height = 128
+    const ctx = canvas.getContext('2d')!
+    ctx.fillStyle = '#bfb8a4'
+    ctx.font = '400 52px "Shippori Mincho", serif'
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+    ctx.fillText('— デンジ。', canvas.width / 2, canvas.height / 2)
+    const tex = new THREE.CanvasTexture(canvas)
+    tex.colorSpace = THREE.SRGBColorSpace
+    tex.needsUpdate = true
+    return tex
+  }, [])
+
   useFrame((state) => {
     if (!groupRef.current) return
     groupRef.current.visible = visibility > 0.001
@@ -109,6 +127,18 @@ export default function ActAftermath() {
           transparent
           toneMapped={false}
           opacity={lerp(0, 1, Math.min(1, sub * 1.6)) * visibility}
+        />
+      </mesh>
+
+      {/* sign-off — "— デンジ。". Fades in after the title is fully settled
+          so the eye lands on it as the second beat. */}
+      <mesh position={[0, 1.8, -2.2]} scale={[2.4, 0.3, 1]}>
+        <planeGeometry args={[1, 1]} />
+        <meshBasicMaterial
+          map={quoteCanvas}
+          transparent
+          toneMapped={false}
+          opacity={lerp(0, 1, Math.max(0, sub - 0.55) * 2.2) * visibility}
         />
       </mesh>
     </group>

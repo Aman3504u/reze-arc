@@ -4,6 +4,7 @@ import { useFrame } from '@react-three/fiber'
 import { useActScene } from '../hooks/useActScene'
 import { lerp, smoothstep } from '../utils/easing'
 import { heatwaveVert, heatwaveFrag } from '../fx/shaders/heatwave'
+import { RezePortrait } from './primitives/RezePortrait'
 
 /**
  * Act III — The Reveal.
@@ -81,30 +82,16 @@ export default function ActReveal() {
         <meshStandardMaterial color="#0a0a0e" roughness={1} />
       </mesh>
 
-      {/* figure — re-used silhouette, now rendered with emissive glitch */}
+      {/* Reze — reveal portrait. Bomb-plug exposed, red bleed + scanlines
+          baked into the SVG to read as a "mask slipping" moment without
+          needing a real video texture. */}
       <group position={[0, 0, -0.4]}>
-        <mesh position={[0, 1.05, 0]}>
-          <cylinderGeometry args={[0.24, 0.3, 0.9, 8]} />
-          <meshStandardMaterial
-            color="#120507"
-            roughness={0.9}
-            emissive="#ff2040"
-            emissiveIntensity={0.35}
-          />
-        </mesh>
-        <mesh position={[0, 1.72, 0]}>
-          <sphereGeometry args={[0.2, 16, 16]} />
-          <meshStandardMaterial
-            color="#120507"
-            roughness={0.8}
-            emissive="#ff2040"
-            emissiveIntensity={0.15}
-          />
-        </mesh>
-        <mesh position={[0.08, 1.86, 0.15]}>
-          <boxGeometry args={[0.08, 0.02, 0.06]} />
-          <meshBasicMaterial color="#ff2040" toneMapped={false} />
-        </mesh>
+        <RezePortrait
+          variant="reveal"
+          position={[0, 1.55, 0]}
+          height={2.0}
+          opacity={smoothstep(visibility)}
+        />
       </group>
 
       {/* detonation glyph — shards ring around her */}

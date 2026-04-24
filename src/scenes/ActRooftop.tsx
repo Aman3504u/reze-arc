@@ -3,7 +3,8 @@ import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
 import { useActScene } from '../hooks/useActScene'
 import { SeededRandom } from '../utils/random'
-import { lerp } from '../utils/easing'
+import { lerp, smoothstep } from '../utils/easing'
+import { RezePortrait } from './primitives/RezePortrait'
 
 /**
  * Act II — A Promise on the Rooftop.
@@ -150,19 +151,16 @@ export default function ActRooftop() {
           <meshStandardMaterial color="#0a0a0c" roughness={0.8} />
         </mesh>
       </group>
-      <group position={[0.25, 0, -0.4]}>
-        <mesh position={[0, 1.05, 0]}>
-          <cylinderGeometry args={[0.24, 0.3, 0.9, 8]} />
-          <meshStandardMaterial color="#120507" roughness={0.9} />
-        </mesh>
-        <mesh position={[0, 1.72, 0]}>
-          <sphereGeometry args={[0.2, 16, 16]} />
-          <meshStandardMaterial color="#120507" roughness={0.8} />
-        </mesh>
-        <mesh position={[0.08, 1.86, 0.15]}>
-          <boxGeometry args={[0.08, 0.02, 0.06]} />
-          <meshBasicMaterial color="#e53250" toneMapped={false} />
-        </mesh>
+      {/* Reze — rooftop silhouette billboard, rim-lit toward the moon. The
+          portrait is placed slightly behind/beside the Denji silhouette so
+          the backlight reads correctly. */}
+      <group position={[0.32, 0, -0.35]} rotation={[0, -0.18, 0]}>
+        <RezePortrait
+          variant="rooftop"
+          position={[0, 1.35, 0]}
+          height={2.5}
+          opacity={smoothstep(visibility) * 0.95}
+        />
       </group>
 
       {/* moon disc */}

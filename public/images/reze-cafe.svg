@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 768" width="512" height="768">
+  <!--
+    Reze — Café portrait (front, 3/4 slight right). Hand-crafted SVG, no
+    copyrighted source frames. Iconic traits: cobalt bob with asymmetric
+    forehead sweep, pale skin, dark eyes with catch-light, black choker
+    collar, white apron strap, red spider brooch, neck bomb-plug on the
+    right side. Kept nearly monochrome so the scene tint + rim-lighting
+    from the 3D stage paints her rather than baked color fighting the
+    per-act palette.
+  -->
+  <defs>
+    <linearGradient id="skin" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#f3dccb"/>
+      <stop offset="1" stop-color="#c9a690"/>
+    </linearGradient>
+    <linearGradient id="hair" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#2a4ea8"/>
+      <stop offset="0.45" stop-color="#1b2f6b"/>
+      <stop offset="1" stop-color="#0e1636"/>
+    </linearGradient>
+    <linearGradient id="hairShine" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#6a8fe0" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#a8c4ff" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#6a8fe0" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="apron" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#f5f1e8"/>
+      <stop offset="1" stop-color="#b9b0a0"/>
+    </linearGradient>
+    <radialGradient id="cheek" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#e89294" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#e89294" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- transparent background (scene provides its own vignette/fog) -->
+
+  <!-- SHOULDERS / APRON -->
+  <path d="M64 720 L64 600 Q120 540 180 530 L332 530 Q392 540 448 600 L448 720 Z" fill="url(#apron)"/>
+  <path d="M186 530 L186 720 M326 530 L326 720" stroke="#6f6658" stroke-width="3" opacity="0.5"/>
+  <!-- apron cross-strap (cafe uniform) -->
+  <path d="M180 540 Q256 495 332 540" stroke="#3a3025" stroke-width="8" fill="none"/>
+
+  <!-- NECK -->
+  <path d="M212 470 Q218 520 226 560 L286 560 Q294 520 300 470 Z" fill="url(#skin)"/>
+  <!-- neck shadow under jaw -->
+  <path d="M212 470 Q222 492 256 498 Q290 492 300 470 L296 485 Q256 510 216 485 Z" fill="#7d5c47" opacity="0.55"/>
+
+  <!-- BOMB PLUG on right side of neck (signature trait) -->
+  <g transform="translate(300 500)">
+    <circle r="18" fill="#2a0b0c" stroke="#d4a673" stroke-width="3"/>
+    <circle r="10" fill="#d4a673"/>
+    <circle r="4" fill="#3a0d10"/>
+    <!-- tiny thread-ring highlight -->
+    <circle r="18" fill="none" stroke="#6d3818" stroke-width="1.2" opacity="0.8"/>
+  </g>
+
+  <!-- CHOKER COLLAR with SPIDER BROOCH -->
+  <rect x="202" y="548" width="108" height="18" fill="#151118"/>
+  <rect x="202" y="548" width="108" height="3" fill="#353039" opacity="0.8"/>
+  <!-- spider brooch center-chest -->
+  <g transform="translate(256 558)" fill="#c8172b" stroke="#7a0a14" stroke-width="1">
+    <circle r="5"/>
+    <circle cx="-4" cy="-2" r="2.2"/>
+    <circle cx="4" cy="-2" r="2.2"/>
+    <!-- legs -->
+    <path d="M-6 0 L-14 -3 M-6 1 L-15 3 M-6 2 L-13 6
+             M6 0 L14 -3 M6 1 L15 3 M6 2 L13 6" stroke="#7a0a14" stroke-width="1.6" fill="none"/>
+  </g>
+
+  <!-- FACE / HEAD -->
+  <!-- back of hair halo so face sits inside it -->
+  <path d="M138 290 Q140 180 212 140 Q256 120 300 140 Q372 180 374 290 L374 430 Q370 470 340 490 L172 490 Q142 470 138 430 Z" fill="url(#hair)"/>
+  <!-- face shape -->
+  <path d="M190 260 Q190 200 256 188 Q322 200 322 260 L322 380 Q316 430 284 452 L228 452 Q196 430 190 380 Z" fill="url(#skin)"/>
+  <!-- blush -->
+  <ellipse cx="224" cy="378" rx="22" ry="10" fill="url(#cheek)"/>
+  <ellipse cx="288" cy="378" rx="22" ry="10" fill="url(#cheek)"/>
+
+  <!-- FOREHEAD HAIR — signature asymmetric sweep -->
+  <path d="M160 220 Q210 168 260 208 Q300 176 356 210 Q340 250 310 250 L196 250 Q172 246 160 220 Z" fill="url(#hair)"/>
+  <!-- side hair coming down past cheeks -->
+  <path d="M170 240 Q150 320 160 420 Q168 440 188 444 L188 300 Q178 270 170 240 Z" fill="url(#hair)"/>
+  <path d="M342 240 Q362 320 352 420 Q344 440 324 444 L324 300 Q334 270 342 240 Z" fill="url(#hair)"/>
+  <!-- hair shine streak -->
+  <path d="M182 200 Q220 190 254 198 L248 232 Q214 222 186 236 Z" fill="url(#hairShine)"/>
+
+  <!-- EYEBROWS -->
+  <path d="M204 288 Q226 280 250 286" stroke="#1a1530" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <path d="M262 286 Q286 280 308 288" stroke="#1a1530" stroke-width="6" stroke-linecap="round" fill="none"/>
+
+  <!-- EYES -->
+  <g>
+    <!-- whites -->
+    <ellipse cx="225" cy="322" rx="18" ry="10" fill="#f5ecde"/>
+    <ellipse cx="287" cy="322" rx="18" ry="10" fill="#f5ecde"/>
+    <!-- irises (warm brown, Reze's canonical eye color) -->
+    <circle cx="225" cy="322" r="9" fill="#5a3a1e"/>
+    <circle cx="287" cy="322" r="9" fill="#5a3a1e"/>
+    <!-- pupils -->
+    <circle cx="225" cy="322" r="4" fill="#120a05"/>
+    <circle cx="287" cy="322" r="4" fill="#120a05"/>
+    <!-- catch-lights -->
+    <circle cx="228" cy="319" r="2.2" fill="#fff"/>
+    <circle cx="290" cy="319" r="2.2" fill="#fff"/>
+    <!-- lower lashes / eye line -->
+    <path d="M207 322 Q225 338 243 322" stroke="#1a1530" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    <path d="M269 322 Q287 338 305 322" stroke="#1a1530" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    <!-- upper lash line -->
+    <path d="M207 316 Q225 306 243 316" stroke="#0d0818" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+    <path d="M269 316 Q287 306 305 316" stroke="#0d0818" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- NOSE -->
+  <path d="M254 340 Q256 368 250 380" stroke="#8a6750" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+  <!-- MOUTH — small closed, faint smile -->
+  <path d="M240 410 Q256 418 272 410" stroke="#7a3a34" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M240 410 Q256 414 272 410" stroke="#a85252" stroke-width="1.4" fill="none"/>
+</svg>

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 768" width="512" height="768">
+  <!--
+    Reze — Rooftop silhouette. Near-pure profile silhouette, rim-lit from
+    behind, to read instantly as a figure against night sky. Alpha-blended
+    into the rooftop act as a billboard. Bomb-plug catches a tiny red gleam
+    in the neck.
+  -->
+  <defs>
+    <linearGradient id="rim" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#3d5ea8" stop-opacity="0"/>
+      <stop offset="0.55" stop-color="#8fa8e8" stop-opacity="0.9"/>
+      <stop offset="0.7" stop-color="#ffd5e0" stop-opacity="1"/>
+      <stop offset="0.85" stop-color="#8fa8e8" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#0b0d12" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#0a0c1a"/>
+      <stop offset="1" stop-color="#11172c"/>
+    </linearGradient>
+  </defs>
+
+  <!-- no backdrop: SVG renders on a transparent plane so the rooftop
+       sky + moon stay visible behind the silhouette -->
+
+
+  <!-- silhouette body -->
+  <path fill="url(#body)" d="
+    M130 760
+    L130 560
+    Q130 500 180 470
+    L200 460
+    Q212 412 230 380
+    Q196 346 198 292
+    Q202 200 262 172
+    Q330 162 352 214
+    Q368 260 346 316
+    Q334 342 320 358
+    Q344 378 352 420
+    Q360 448 352 470
+    L380 480
+    Q420 496 420 560
+    L420 760 Z"/>
+
+  <!-- hair asymmetric sweep across forehead (silhouette bite) -->
+  <path fill="url(#body)" d="M206 226 Q254 188 312 206 Q308 238 268 242 Q226 240 206 226 Z"/>
+
+  <!-- rim-light highlight along right profile -->
+  <path
+    d="M210 470 Q194 410 206 340 Q202 260 226 210 Q258 178 304 184 Q346 200 356 252 Q364 308 340 360 Q330 384 318 398 Q342 420 352 456 Q358 474 356 490"
+    stroke="url(#rim)" stroke-width="7" fill="none" stroke-linecap="round"/>
+
+  <!-- tiny neck-plug gleam -->
+  <circle cx="336" cy="364" r="4" fill="#ff6a5a"/>
+  <circle cx="336" cy="364" r="1.6" fill="#ffd7c9"/>
+</svg>

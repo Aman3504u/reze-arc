@@ -79,11 +79,13 @@ src/
 │   ├── Lighting.tsx             # 3-point rig whose colors follow the palette.
 │   └── AssetPipeline.tsx        # Draco / KTX2 / meshopt preload helpers.
 ├── scenes/
-│   ├── ActCafe.tsx              # Rain, counter, silhouettes, neon sign.
-│   ├── ActRooftop.tsx           # Stars, petals, moon, two figures.
-│   ├── ActReveal.tsx            # Shard-ring glyph, heatwave shader.
+│   ├── primitives/
+│   │   └── RezePortrait.tsx     # Hand-crafted SVG billboards — 3 variants.
+│   ├── ActCafe.tsx              # Rain, counter, Reze portrait, neon sign.
+│   ├── ActRooftop.tsx           # Stars, petals, moon, silhouettes.
+│   ├── ActReveal.tsx            # Shard-ring glyph, heatwave shader, exposed bomb-plug.
 │   ├── ActDetonation.tsx        # 2.4k instanced debris + shockwave shader + embers.
-│   └── ActAftermath.tsx         # Bench, paper bag, one drifting ember, またね.
+│   └── ActAftermath.tsx         # Bench, paper bag, またね, — デンジ。 sign-off.
 ├── fx/
 │   ├── Postprocessing.tsx       # Bloom / DoF / Chromatic / Noise / Vignette stack.
 │   └── shaders/
@@ -169,12 +171,14 @@ of code and gives us per-frame, per-stem automation precision that no
 pre-rendered track can match. The heartbeat in Act III is literally
 scheduled by the AudioContext.
 
-**No hero GLB.** The stylized low-poly silhouettes are a deliberate choice.
-A photoreal character would fight the grain + bloom for attention. The
-minimalism also means the entire experience weighs ~14 KB gzipped of
-JavaScript beyond the three.js + r3f baseline. Drop a Draco-compressed
-character into `/public/models/` if you want to push fidelity further —
-the pipeline is ready.
+**Reze as hand-crafted SVG.** She's the subject of the film, so she has to
+read instantly — the low-poly silhouettes alone weren't enough. Three
+hand-crafted SVG portraits (café front, rooftop rim-lit silhouette, reveal
+profile with exposed bomb-plug) live in `public/images/` and are rendered
+as alpha-masked billboards in their respective acts via
+`scenes/primitives/RezePortrait.tsx`. The SVGs are intentionally stylized
+— not copyrighted anime frames — and the scene's own rim light + per-act
+palette paints her on top. Total added weight: ~6 KB gzipped.
 
 **Detonation is reversible.** Every particle, shader value, and light
 intensity in Act IV is a pure function of `subProgress`. Scrolling back
